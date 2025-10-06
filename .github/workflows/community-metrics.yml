@@ -1,0 +1,100 @@
+﻿name: Community Metrics
+
+on:
+  schedule:
+    - cron: '0 0 1 * *' # First day of every month
+  workflow_dispatch:
+
+permissions:
+  issues: read
+  pull-requests: read
+  discussions: read
+
+jobs:
+  metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate Community Metrics
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const now = new Date();
+            const lastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+            const thisMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+
+            // Get repository statistics
+            const repoData = await github.rest.repos.get({ owner, repo });
+
+            // Get issues and PRs from last month
+            const issues = await github.rest.issues.listForRepo({
+              owner,
+              repo,
+              state: 'all',
+              since: lastMonth.toISOString(),
+              per_page: 100
+            });
+
+            const contributors = await github.rest.repos.listContributors({
+              owner,
+              repo,
+              per_page: 100
+            });
+
+            // Calculate metrics
+            const totalIssues = issues.data.filter(item => !item.pull_request).length;
+            const totalPRs = issues.data.filter(item => item.pull_request).length;
+            const closedIssues = issues.data.filter(item => !item.pull_request && item.state === 'closed').length;
+            const mergedPRs = issues.data.filter(item => item.pull_request && item.state === 'closed').length;
+
+            // Create metrics report
+            const report = `
+            # Travel Logger - Monthly Community Metrics Report
+
+            **Report Date**: ${now.toDateString()}
+            **Reporting Period**: ${lastMonth.toDateString()} - ${thisMonth.toDateString()}
+
+            ## 📊 Repository Statistics
+
+            - **⭐ Stars**: ${repoData.data.stargazers_count}
+            - **🍴 Forks**: ${repoData.data.forks_count}
+            - **👥 Contributors**: ${contributors.data.length}
+            - **📂 Open Issues**: ${repoData.data.open_issues_count}
+
+            ## 📈 Monthly Activity
+
+            - **🐛 New Issues**: ${totalIssues}
+            - **✅ Closed Issues**: ${closedIssues}
+            - **🔀 New Pull Requests**: ${totalPRs}
+            - **✅ Merged Pull Requests**: ${mergedPRs}
+
+            ## 🎯 Community Health
+
+            - **📊 Issue Close Rate**: ${totalIssues > 0 ? Math.round((closedIssues / totalIssues) * 100) : 0}%
+            - **📊 PR Merge Rate**: ${totalPRs > 0 ? Math.round((mergedPRs / totalPRs) * 100) : 0}%
+
+            ## 🚀 Goals for Next Month
+
+            - [ ] Increase contributor count
+            - [ ] Improve issue response time
+            - [ ] Enhance documentation
+            - [ ] Grow community engagement
+
+            ---
+
+            *This report is generated automatically on the 1st of each month.*
+            `;
+
+            console.log(report);
+
+            // Create an issue with the metrics (optional)
+            // await github.rest.issues.create({
+            //   owner,
+            //   repo,
+            //   title: `Monthly Community Metrics - ${now.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}`,
+            //   body: report,
+            //   labels: ['metrics', 'community']
+            // });

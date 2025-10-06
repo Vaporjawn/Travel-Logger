@@ -1,0 +1,17 @@
+﻿blank_issues_enabled: false
+contact_links:
+  - name: 💬 General Discussion
+    url: https://github.com/Vaporjawn/Travel-Logger/discussions/categories/general
+    about: Ask questions, share ideas, or discuss the project with the community
+  - name: 🚀 Show and Tell
+    url: https://github.com/Vaporjawn/Travel-Logger/discussions/categories/show-and-tell
+    about: Share your Travel Logger setups, customizations, or cool travel logs!
+  - name: 💡 Ideas & Feedback
+    url: https://github.com/Vaporjawn/Travel-Logger/discussions/categories/ideas
+    about: Brainstorm new features and improvements with the community
+  - name: 🆘 Get Help
+    url: https://github.com/Vaporjawn/Travel-Logger/discussions/categories/q-a
+    about: Get help with setup, configuration, or usage questions
+  - name: 📧 Contact Maintainer
+    url: https://github.com/Vaporjawn
+    about: Contact the maintainer directly for sensitive issues or collaboration

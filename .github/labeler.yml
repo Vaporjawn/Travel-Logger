@@ -1,0 +1,64 @@
+﻿# Labeler configuration for automatic PR labeling
+# https://github.com/actions/labeler
+
+# Frontend changes
+'component: frontend':
+  - client/**/*
+  - '**/*.tsx'
+  - '**/*.jsx'
+  - '**/*.css'
+  - '**/package.json'
+  - '**/vite.config.ts'
+  - '**/tsconfig*.json'
+
+# Backend changes
+'component: backend':
+  - server/**/*
+  - '**/api/**/*'
+  - '**/models/**/*'
+  - '**/middlewares.js'
+  - server/package.json
+
+# Documentation changes
+'type: documentation':
+  - '**/*.md'
+  - docs/**/*
+  - '.github/**/*.md'
+  - '**/README.md'
+  - '**/CHANGELOG.md'
+
+# Configuration changes
+'type: configuration':
+  - '.github/workflows/**/*'
+  - '.github/**/*.yml'
+  - '.github/**/*.yaml'
+  - '**/eslint.config.js'
+  - '**/.gitignore'
+  - '**/.gitattributes'
+  - '**/now.json'
+  - '**/vercel.json'
+
+# Dependencies
+'dependencies':
+  - '**/package.json'
+  - '**/package-lock.json'
+  - '**/yarn.lock'
+
+# Tests
+'type: tests':
+  - '**/*.test.*'
+  - '**/*.spec.*'
+  - '**/tests/**/*'
+  - '**/test/**/*'
+  - '**/setupTests.js'
+
+# Security
+'type: security':
+  - '.github/SECURITY.md'
+  - '**/security/**/*'
+  - '**/*security*'
+
+# GitHub workflows and actions
+'github actions':
+  - '.github/workflows/**/*'
+  - '.github/actions/**/*'

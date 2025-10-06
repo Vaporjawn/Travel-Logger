@@ -1,0 +1,103 @@
+﻿name: Auto Label Issues and PRs
+
+on:
+  issues:
+    types: [opened, edited]
+  pull_request:
+    types: [opened, edited, synchronize]
+
+permissions:
+  issues: write
+  pull-requests: write
+  contents: read
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Label issues and PRs
+        uses: actions/labeler@v4
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          configuration-path: .github/labeler.yml
+
+      - name: Auto-label based on content
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const issue = context.payload.issue || context.payload.pull_request;
+            const isIssue = !!context.payload.issue;
+            const title = issue.title.toLowerCase();
+            const body = issue.body ? issue.body.toLowerCase() : '';
+            const labels = [];
+
+            // Priority labels based on keywords
+            if (title.includes('urgent') || title.includes('critical') || body.includes('urgent') || body.includes('critical')) {
+              labels.push('priority: high');
+            } else if (title.includes('important') || body.includes('important')) {
+              labels.push('priority: medium');
+            }
+
+            // Component labels for issues
+            if (isIssue) {
+              if (title.includes('frontend') || title.includes('ui') || title.includes('react') || body.includes('frontend')) {
+                labels.push('component: frontend');
+              }
+              if (title.includes('backend') || title.includes('api') || title.includes('server') || body.includes('backend')) {
+                labels.push('component: backend');
+              }
+              if (title.includes('database') || title.includes('mongodb') || body.includes('database')) {
+                labels.push('component: database');
+              }
+              if (title.includes('map') || title.includes('mapbox') || body.includes('mapbox')) {
+                labels.push('component: maps');
+              }
+              if (title.includes('auth') || title.includes('login') || body.includes('authentication')) {
+                labels.push('component: authentication');
+              }
+              if (title.includes('mobile') || title.includes('responsive') || body.includes('mobile')) {
+                labels.push('component: mobile');
+              }
+            }
+
+            // Difficulty labels for issues
+            if (isIssue && (title.includes('beginner') || body.includes('beginner') ||
+                           title.includes('easy') || body.includes('easy') ||
+                           title.includes('simple') || body.includes('simple'))) {
+              labels.push('difficulty: beginner');
+            }
+
+            // Type labels
+            if (title.includes('feature') || title.includes('enhancement') || body.includes('feature request')) {
+              labels.push('type: enhancement');
+            }
+            if (title.includes('bug') || title.includes('error') || title.includes('issue')) {
+              labels.push('type: bug');
+            }
+            if (title.includes('docs') || title.includes('documentation') || body.includes('documentation')) {
+              labels.push('type: documentation');
+            }
+            if (title.includes('question') || body.includes('how to') || body.includes('how do i')) {
+              labels.push('type: question');
+            }
+
+            // Platform labels
+            if (title.includes('windows') || body.includes('windows')) {
+              labels.push('platform: windows');
+            }
+            if (title.includes('macos') || title.includes('mac') || body.includes('macos')) {
+              labels.push('platform: macos');
+            }
+            if (title.includes('linux') || body.includes('linux')) {
+              labels.push('platform: linux');
+            }
+
+            // Add labels if any were found
+            if (labels.length > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: labels
+              });
+            }

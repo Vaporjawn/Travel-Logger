@@ -1,0 +1,49 @@
+﻿# GitHub Discussions Configuration
+# This file configures the discussion categories for the repository
+
+# Welcome message for new discussions
+welcome_message: |
+  Welcome to Travel Logger Discussions! 🌍
+
+  This is the place to:
+  - Ask questions about setup and usage
+  - Share your travel logger setups and stories
+  - Discuss new feature ideas
+  - Get help from the community
+  - Show off your travel logs
+
+  Please be respectful and follow our Code of Conduct.
+
+  Before posting, please:
+  1. Search existing discussions to avoid duplicates
+  2. Check our documentation and troubleshooting guides
+  3. Provide context and details in your posts
+
+  Happy traveling! ✈️
+
+# Discussion categories
+categories:
+  - name: "General"
+    emoji: "💬"
+    description: "General discussion about Travel Logger"
+    format: "open"
+
+  - name: "Q&A"
+    emoji: "❓"
+    description: "Ask questions and get help from the community"
+    format: "question-answer"
+
+  - name: "Ideas"
+    emoji: "💡"
+    description: "Share ideas for new features and improvements"
+    format: "open"
+
+  - name: "Show and Tell"
+    emoji: "🚀"
+    description: "Share your Travel Logger setups, customizations, and cool travel logs!"
+    format: "open"
+
+  - name: "Announcements"
+    emoji: "📢"
+    description: "Project updates and announcements"
+    format: "announcement"

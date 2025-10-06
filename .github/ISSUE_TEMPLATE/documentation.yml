@@ -1,0 +1,95 @@
+﻿name: 📚 Documentation
+description: Report an issue or suggest improvements to documentation
+title: "[DOCS]: "
+labels: ["documentation", "triage"]
+assignees:
+  - Vaporjawn
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve our documentation! 📖
+        Good documentation is essential for a great developer experience.
+
+  - type: dropdown
+    id: doc-type
+    attributes:
+      label: Documentation Type
+      description: What type of documentation issue is this?
+      options:
+        - Missing Documentation
+        - Incorrect/Outdated Information
+        - Unclear Instructions
+        - Broken Links
+        - Code Examples
+        - API Documentation
+        - Setup Guide
+        - Troubleshooting
+        - Contributing Guide
+        - README Improvement
+    validations:
+      required: true
+
+  - type: input
+    id: doc-location
+    attributes:
+      label: Document Location
+      description: Which document or section needs attention?
+      placeholder: e.g., README.md, GETTING_STARTED.md, API section, etc.
+    validations:
+      required: true
+
+  - type: textarea
+    id: issue-description
+    attributes:
+      label: Issue Description
+      description: Describe the documentation issue or improvement needed
+      placeholder: Please describe what's wrong, missing, or could be improved
+    validations:
+      required: true
+
+  - type: textarea
+    id: current-content
+    attributes:
+      label: Current Content (if applicable)
+      description: Quote or describe the current content that needs updating
+      placeholder: Copy/paste the current text that needs attention
+    validations:
+      required: false
+
+  - type: textarea
+    id: suggested-improvement
+    attributes:
+      label: Suggested Improvement
+      description: What should the documentation say instead?
+      placeholder: Provide your suggested changes or additions
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Any additional information that would help
+      placeholder: Screenshots, links, examples, or other context
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      description: Would you like to help improve this documentation?
+      options:
+        - label: I'm willing to submit a PR with the documentation fix
+        - label: I can provide additional examples or screenshots
+        - label: I can review the updated documentation
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our Code of Conduct
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true

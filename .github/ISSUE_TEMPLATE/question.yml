@@ -1,0 +1,87 @@
+﻿name: ❓ Question
+description: Ask a question about the project
+title: "[QUESTION]: "
+labels: ["question", "triage"]
+assignees:
+  - Vaporjawn
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for your question! 🤔
+        Before asking, please check:
+        - [📖 Getting Started Guide](https://github.com/Vaporjawn/Travel-Logger/blob/master/GETTING_STARTED.md)
+        - [🔧 Troubleshooting Guide](https://github.com/Vaporjawn/Travel-Logger/blob/master/TROUBLESHOOTING.md)
+        - [💬 Existing Discussions](https://github.com/Vaporjawn/Travel-Logger/discussions)
+
+  - type: dropdown
+    id: question-type
+    attributes:
+      label: Question Type
+      description: What type of question is this?
+      options:
+        - Setup/Installation
+        - Configuration
+        - Usage/How-to
+        - API/Backend
+        - Frontend/UI
+        - Deployment
+        - Contributing
+        - General
+    validations:
+      required: true
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your Question
+      description: Please ask your question in detail
+      placeholder: Please provide as much context as possible for your question
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: What have you tried? What documentation have you checked?
+      placeholder: |
+        - What you've already tried
+        - Documentation you've checked
+        - Any error messages
+        - Your specific use case
+    validations:
+      required: false
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment Details
+      description: Please share relevant environment information
+      placeholder: |
+        - OS: [e.g. macOS, Windows, Linux]
+        - Node.js version: [e.g. v18.17.0]
+        - npm/yarn version: [e.g. npm 9.6.7]
+        - Browser: [if frontend related]
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      description: Please confirm you've done the following
+      options:
+        - label: I've searched existing issues and discussions
+        - label: I've checked the documentation
+        - label: I've provided sufficient context
+          required: true
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our Code of Conduct
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
