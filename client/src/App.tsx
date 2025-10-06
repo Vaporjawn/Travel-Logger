@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import Map, { Marker, Popup, NavigationControl, MapLayerMouseEvent, ViewStateChangeEvent, MarkerEvent } from 'react-map-gl';
+import Map, { Marker, Popup, NavigationControl } from 'react-map-gl/mapbox';
+import type { MapMouseEvent, ViewStateChangeEvent } from 'react-map-gl/mapbox';
 import { Box, CircularProgress, Alert, Fab, Zoom } from '@mui/material';
 import { Add as AddIcon, MyLocation as MyLocationIcon } from '@mui/icons-material';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -44,7 +45,7 @@ function App() {
     fetchEntries();
   }, [fetchEntries]);
 
-  const handleMapDoubleClick = (event: MapLayerMouseEvent) => {
+  const handleMapDoubleClick = (event: MapMouseEvent) => {
     const { lngLat } = event;
     if (!lngLat) return;
 
@@ -132,8 +133,8 @@ function App() {
             longitude={entry.longitude}
             latitude={entry.latitude}
             anchor="bottom"
-            onClick={(e: MarkerEvent) => {
-              e.originalEvent.stopPropagation();
+            onClick={(e) => {
+              e.originalEvent?.stopPropagation();
               handleMarkerClick(entry);
             }}
           >
