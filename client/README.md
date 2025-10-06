@@ -1,68 +1,122 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Travel Logger - Client
 
-## Available Scripts
+A modern, interactive travel logging application built with React, TypeScript, Vite, and Material UI. Visualize your travel adventures on an interactive Mapbox map.
 
-In the project directory, you can run:
+## 🚀 Features
 
-### `npm start`
+- **Interactive Map**: Built with Mapbox GL JS and react-map-gl
+- **Material UI Design**: Modern, responsive UI with dark theme
+- **TypeScript**: Full type safety throughout the application
+- **Form Validation**: Robust form handling with React Hook Form and Zod
+- **Responsive**: Works beautifully on desktop and mobile devices
+- **Real-time Updates**: Instantly see your travel logs on the map
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 📋 Prerequisites
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- Node.js (v18 or higher)
+- npm or yarn
+- Mapbox API token ([Get one free at Mapbox](https://www.mapbox.com/))
+- Backend server running (see ../server)
 
-### `npm test`
+## 🛠️ Installation
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Install dependencies:
+```bash
+npm install
+```
 
-### `npm run build`
+2. Create a `.env` file based on `.env.example`:
+```bash
+cp .env.example .env
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. Add your Mapbox token to `.env`:
+```env
+VITE_MAPBOX_TOKEN=your_mapbox_token_here
+```
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## 🏃‍♂️ Running the Application
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Development Mode
+```bash
+npm run dev
+```
+The application will be available at `http://localhost:5173`
 
-### `npm run eject`
+### Build for Production
+```bash
+npm run build
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Preview Production Build
+```bash
+npm run preview
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🗺️ Usage
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1. **View Travel Logs**: All your saved travel locations appear as markers on the map
+2. **Add New Entry**: Double-click anywhere on the map to add a new travel log
+3. **View Details**: Click on any marker to see the full details of that location
+4. **Navigate**: Use the navigation controls or your mouse/touch to explore the map
+5. **Find Your Location**: Click the location button to center the map on your current position
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## 📝 Form Fields
 
-## Learn More
+When adding a new travel log, you can include:
+- **Title** (required): Name of the location
+- **Description**: Detailed description of your visit
+- **Comments**: Personal notes or highlights
+- **Image URL**: Link to a photo from your trip
+- **Rating**: Rate your experience (0-10 stars)
+- **Visit Date** (required): When you visited
+- **API Key** (required): Your backend API key for security
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🎨 Technology Stack
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **React 18**: Modern React with hooks
+- **TypeScript**: Type-safe development
+- **Vite**: Lightning-fast build tool
+- **Material UI (MUI)**: Comprehensive UI component library
+- **Mapbox GL JS**: Interactive maps
+- **React Hook Form**: Performant form handling
+- **Zod**: Schema validation
+- **Axios**: HTTP client
+- **Date-fns**: Date formatting utilities
 
-### Code Splitting
+## 🏗️ Project Structure
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+```
+src/
+├── api/              # API client functions
+│   └── logs.ts       # Travel log API calls
+├── components/       # Reusable React components
+│   ├── Header.tsx    # Application header
+│   ├── LogEntryForm.tsx    # Form for adding travel logs
+│   └── LogEntryPopup.tsx   # Popup for displaying log details
+├── types/            # TypeScript type definitions
+│   └── index.ts      # Shared types
+├── theme.ts          # Material UI theme configuration
+├── App.tsx           # Main application component
+└── main.tsx          # Application entry point
+```
 
-### Analyzing the Bundle Size
+## 🔧 Configuration
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+### Environment Variables
 
-### Making a Progressive Web App
+- `VITE_MAPBOX_TOKEN`: Your Mapbox access token (required)
+- `VITE_API_URL`: Backend API URL (optional, defaults to localhost:1337)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+### Map Styles
 
-### Advanced Configuration
+The application uses Mapbox's dark theme by default. To change the map style, update the `mapStyle` prop in `App.tsx`:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+```typescript
+mapStyle="mapbox://styles/mapbox/streets-v12"  // Light theme
+mapStyle="mapbox://styles/mapbox/satellite-v9"  // Satellite view
+```
 
-### Deployment
+## 📄 License
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+MIT
